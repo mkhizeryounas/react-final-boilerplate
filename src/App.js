@@ -5,8 +5,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/header";
 
-import Home from "./pages/home";
-import Welcome from "./pages/welcome";
+import Home from "./pages/home.jsx";
+import Welcome from "./pages/welcome.jsx";
 
 class App extends Component {
   render() {
