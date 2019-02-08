@@ -17,7 +17,18 @@ class App extends Component {
           <div className="container mt-3">
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/welcome/:name" component={Welcome} />
+              {/* <Route exact path="/welcome/:name" component={Welcome} /> */}
+              <Route
+                exact
+                path="/welcome/:name"
+                render={() =>
+                  1 ? (
+                    <Route component={Welcome} />
+                  ) : (
+                    <Route render={() => <h2>404 - Page not found </h2>} />
+                  )
+                }
+              />
               <Route render={() => <h2>404 - Page not found </h2>} />
             </Switch>
           </div>
