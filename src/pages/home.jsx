@@ -15,6 +15,8 @@ class Home extends Component {
   submitForm = () => {
     console.log(this.state);
     this.props.addpost({ name: this.state.name });
+    // this.props.history.push(`/welcome/${this.state.name}`);
+    // this.props.dispatch(addPost({ name: this.state.name }));
     this.setState({ name: "" });
   };
   render() {
@@ -46,7 +48,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    addpost: post => dispatch(addPost(post))
+    addpost: post => dispatch(addPost(post)),
+    dispatch
   };
 };
 export default connect(
