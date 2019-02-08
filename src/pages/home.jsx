@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-
+import { connect } from "react-redux";
+import { addPost } from "../actions/index";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -11,10 +12,11 @@ class Home extends Component {
   setInputValue = (e, inputName) => {
     this.setState({ [inputName]: e.target.value });
   };
-  submitForm() {
+  submitForm = () => {
     console.log(this.state);
-    this.props.history.push(`/welcome/${this.state.name}`);
-  }
+    this.props.addpost({ name: this.state.name });
+    this.setState({ name: "" });
+  };
   render() {
     return (
       <div>
@@ -29,12 +31,25 @@ class Home extends Component {
             onChange={e => this.setInputValue(e, "name")}
           />
         </div>
-        <button className="btn btn-primary" onClick={() => this.submitForm()}>
+        <button className="btn btn-primary" onClick={this.submitForm}>
           Submit
         </button>
+        {this.props.posts.map(value => {
+          return <p>{value.name}</p>;
+        })}
       </div>
     );
   }
 }
-
-export default withRouter(Home);
+const mapStateToProps = state => {
+  return { posts: state.posts };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    addpost: post => dispatch(addPost(post))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Home));
